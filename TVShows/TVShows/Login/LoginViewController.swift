@@ -9,10 +9,12 @@
 import UIKit
 
 class LoginViewController: UIViewController {
-
+    @IBOutlet weak var counter: UILabel!
+    var count = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        counter.text = "0"
         // Do any additional setup after loading the view.
     }
 
@@ -21,7 +23,12 @@ class LoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+   
+    @IBAction func buttonTapped(_ sender: UIButton) {
+        count += 1
+        counter.text = String(count)
+    }
+    
     /*
     // MARK: - Navigation
 
