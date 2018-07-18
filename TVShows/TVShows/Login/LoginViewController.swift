@@ -49,6 +49,13 @@ class LoginViewController: UIViewController {
         passwordTextField.resignFirstResponder()
     }
     
+    @IBAction private func loginButtonActionHandler() {
+        let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
+        let homeViewController = homeStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+        
+        navigationController?.pushViewController(homeViewController, animated: true)
+        // navigationController?.setViewControllers([homeViewController], animated: true)
+    }
 }
 
 extension UIViewController : UITextFieldDelegate {
