@@ -10,14 +10,32 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
+    @IBOutlet weak var checkbox: UIButton!
+    @IBOutlet weak var loginButton: UIButton!
+    
+    private var isBoxChecked: Bool!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        isBoxChecked = false
+        
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func boxTapped(_ sender: Any) {
+     
+        if isBoxChecked == true {
+            isBoxChecked = false
+        }else{
+            isBoxChecked = true
+        }
+        
+        if isBoxChecked == true{
+            checkbox.setImage(UIImage(named: "ic-checkbox-filled"), for: UIControlState.normal)
+        }else{
+            checkbox.setImage(UIImage(named: "ic-checkbox-empty"), for: UIControlState.normal)
+        }
     }
     
    

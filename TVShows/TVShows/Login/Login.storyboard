@@ -17,13 +17,92 @@
                     <view key="view" contentMode="scaleToFill" id="vSK-fV-HJx">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="left" ambiguous="YES" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="4h9-0G-ucR">
+                                <rect key="frame" x="20" y="308" width="280" height="24"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YGp-ET-2hW">
+                                        <rect key="frame" x="0.0" y="0.0" width="115" height="24"/>
+                                        <state key="normal" title="Button" image="ic-checkbox-empty"/>
+                                        <connections>
+                                            <action selector="boxTapped:" destination="HXQ-kc-swW" eventType="touchUpInside" id="GSx-FU-bSn"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Remember me" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="itR-Q7-JHV">
+                                        <rect key="frame" x="115" y="0.0" width="165" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="se2-d7-Vmg">
+                                <rect key="frame" x="69" y="478" width="126" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Create an account">
+                                    <color key="titleColor" red="1" green="0.45294123888015747" blue="0.54294484853744507" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="or" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SoO-Tp-gpR">
+                                <rect key="frame" x="111" y="442" width="16" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="login-logo" translatesAutoresizingMaskIntoConstraints="NO" id="C0a-vf-sz9">
+                                <rect key="frame" x="99" y="67" width="122" height="94"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="kCU-F1-taj">
+                                <rect key="frame" x="20" y="219" width="280.5" height="80"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zBB-PM-ji1">
+                                        <rect key="frame" x="0.0" y="0.0" width="280.5" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TVZ-Ng-B3q">
+                                        <rect key="frame" x="0.0" y="50" width="280.5" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hsX-bX-9aQ">
+                                <rect key="frame" x="35" y="355" width="49" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="0.45294123888015747" blue="0.54294484853744507" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="LOG IN">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                        </subviews>
                         <rect key="contentStretch" x="0.25" y="0.0" width="1" height="1"/>
+                        <constraints>
+                            <constraint firstItem="qJb-1b-Tug" firstAttribute="trailing" secondItem="kCU-F1-taj" secondAttribute="trailing" constant="20" id="6xZ-Fs-sdT"/>
+                            <constraint firstItem="4h9-0G-ucR" firstAttribute="leading" secondItem="qJb-1b-Tug" secondAttribute="leading" constant="20" id="A65-U1-p3t"/>
+                            <constraint firstItem="4h9-0G-ucR" firstAttribute="centerX" secondItem="vSK-fV-HJx" secondAttribute="centerX" id="Ndj-3L-p24"/>
+                            <constraint firstItem="kCU-F1-taj" firstAttribute="leading" secondItem="qJb-1b-Tug" secondAttribute="leading" constant="20" id="acN-R0-LpU"/>
+                            <constraint firstItem="qJb-1b-Tug" firstAttribute="trailing" secondItem="4h9-0G-ucR" secondAttribute="trailing" constant="20" id="jdx-XI-sTB"/>
+                            <constraint firstItem="kCU-F1-taj" firstAttribute="centerX" secondItem="vSK-fV-HJx" secondAttribute="centerX" id="pac-G0-aiV"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="qJb-1b-Tug"/>
                     </view>
+                    <connections>
+                        <outlet property="checkbox" destination="YGp-ET-2hW" id="jUz-wI-sqO"/>
+                        <outlet property="loginButton" destination="hsX-bX-9aQ" id="twh-vy-Xtf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rt8-MU-UWm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="252.17391304347828" y="143.47826086956522"/>
+            <point key="canvasLocation" x="251.25" y="142.6056338028169"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="ic-checkbox-empty" width="24" height="24"/>
+        <image name="login-logo" width="75" height="80"/>
+    </resources>
 </document>
