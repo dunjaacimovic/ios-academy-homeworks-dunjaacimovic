@@ -14,6 +14,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var checkboxButton: UIButton!
     @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var createAccountButton: UIButton!
     
     private var isBoxChecked: Bool!
     
@@ -56,7 +57,16 @@ class LoginViewController: UIViewController {
         navigationController?.pushViewController(homeViewController, animated: true)
         // navigationController?.setViewControllers([homeViewController], animated: true)
     }
+    
+    
+    @IBAction private func createAccountActionHandler() {
+        let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
+        let homeViewController = homeStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+        
+        navigationController?.pushViewController(homeViewController, animated: true)
+    }
 }
+
 
 extension UIViewController : UITextFieldDelegate {
     

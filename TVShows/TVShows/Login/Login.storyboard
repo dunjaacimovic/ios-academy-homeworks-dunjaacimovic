@@ -77,6 +77,9 @@
                                         <state key="normal" title="Create an account">
                                             <color key="titleColor" red="1" green="0.45294123888015747" blue="0.54294484853744507" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="createAccountActionHandler" destination="HXQ-kc-swW" eventType="touchUpInside" id="YVg-HX-kDE"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -104,6 +107,7 @@
                     <navigationItem key="navigationItem" id="riZ-df-Pt0"/>
                     <connections>
                         <outlet property="checkboxButton" destination="YGp-ET-2hW" id="IHa-w3-jgL"/>
+                        <outlet property="createAccountButton" destination="se2-d7-Vmg" id="5Hw-WQ-Caz"/>
                         <outlet property="loginButton" destination="hsX-bX-9aQ" id="twh-vy-Xtf"/>
                         <outlet property="passwordTextField" destination="TVZ-Ng-B3q" id="vDS-fY-MSu"/>
                         <outlet property="usernameTextField" destination="zBB-PM-ji1" id="gex-7u-saP"/>
