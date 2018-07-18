@@ -10,7 +10,9 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
-    @IBOutlet weak var checkbox: UIButton!
+    @IBOutlet weak var usernameTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var checkboxButton: UIButton!
     @IBOutlet weak var loginButton: UIButton!
     
     private var isBoxChecked: Bool!
@@ -19,7 +21,11 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        usernameTextField.delegate = self
+        passwordTextField.delegate = self
+        
         isBoxChecked = false
+        loginButton.layer.cornerRadius = 5
         
     }
 
@@ -32,11 +38,23 @@ class LoginViewController: UIViewController {
         }
         
         if isBoxChecked == true{
-            checkbox.setImage(UIImage(named: "ic-checkbox-filled"), for: UIControlState.normal)
+            checkboxButton.setImage(UIImage(named: "ic-checkbox-filled"), for: UIControlState.normal)
         }else{
-            checkbox.setImage(UIImage(named: "ic-checkbox-empty"), for: UIControlState.normal)
+            checkboxButton.setImage(UIImage(named: "ic-checkbox-empty"), for: UIControlState.normal)
         }
     }
     
-   
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        usernameTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
+    }
+    
+}
+
+extension UIViewController : UITextFieldDelegate {
+    
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }
