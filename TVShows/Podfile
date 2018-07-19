@@ -8,6 +8,8 @@ target 'TVShows' do
   # Pods for TVShows
   pod 'SVProgressHUD', '~> 2.2'
   pod 'Alamofire'
+  pod 'CodableAlamofire'
+
   target 'TVShowsTests' do
     inherit! :search_paths
     # Pods for testing
@@ -19,3 +21,5 @@ target 'TVShows' do
   end
 
 end
+
+ 
