@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0BD727F3142503E022773709 /* Pods_TVShows.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D63F983A33D40060CA6A6108 /* Pods_TVShows.framework */; };
+		5C0B32BA20FF22FF0046EBB1 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C0B32B920FF22FF0046EBB1 /* Home.storyboard */; };
+		5C0B32BC20FF23400046EBB1 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0B32BB20FF23400046EBB1 /* HomeViewController.swift */; };
 		5C7FEF1420F2501A00149936 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C7FEF1320F2501A00149936 /* Login.storyboard */; };
 		5C7FEF1620F2503500149936 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7FEF1520F2503500149936 /* LoginViewController.swift */; };
 		5C9ADD2420EE6F2400F9680E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9ADD2320EE6F2400F9680E /* AppDelegate.swift */; };
@@ -40,6 +42,8 @@
 		28A8249D4A4CCE62B0F730E0 /* Pods-TVShowsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TVShowsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TVShowsTests/Pods-TVShowsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		325DCCA734EA52A0B96DDC5E /* Pods-TVShowsUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TVShowsUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TVShowsUITests/Pods-TVShowsUITests.release.xcconfig"; sourceTree = "<group>"; };
 		34544F359DF99D2A3617A952 /* Pods_TVShowsUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TVShowsUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C0B32B920FF22FF0046EBB1 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
+		5C0B32BB20FF23400046EBB1 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		5C7FEF1320F2501A00149936 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		5C7FEF1520F2503500149936 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5C9ADD2020EE6F2400F9680E /* TVShows.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TVShows.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -132,6 +136,8 @@
 			isa = PBXGroup;
 			children = (
 				5C7FEF1220F24FF500149936 /* Login */,
+				5C0B32BB20FF23400046EBB1 /* HomeViewController.swift */,
+				5C0B32B920FF22FF0046EBB1 /* Home.storyboard */,
 				5C9ADD2320EE6F2400F9680E /* AppDelegate.swift */,
 				5C9ADD2A20EE6F2500F9680E /* Assets.xcassets */,
 				5C9ADD2F20EE6F2500F9680E /* Info.plist */,
@@ -280,6 +286,7 @@
 			files = (
 				5C7FEF1420F2501A00149936 /* Login.storyboard in Resources */,
 				5C9ADD2B20EE6F2500F9680E /* Assets.xcassets in Resources */,
+				5C0B32BA20FF22FF0046EBB1 /* Home.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,11 +351,13 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-TVShows/Pods-TVShows-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/CodableAlamofire/CodableAlamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CodableAlamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -383,6 +392,7 @@
 			files = (
 				5C7FEF1620F2503500149936 /* LoginViewController.swift in Sources */,
 				5C9ADD2420EE6F2400F9680E /* AppDelegate.swift in Sources */,
+				5C0B32BC20FF23400046EBB1 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

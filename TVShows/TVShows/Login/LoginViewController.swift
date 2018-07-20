@@ -7,36 +7,144 @@
 //
 
 import UIKit
+import Alamofire
+import SVProgressHUD
+import CodableAlamofire
 
 class LoginViewController: UIViewController {
-    @IBOutlet weak var counter: UILabel!
-    var count = 0
+    
+    @IBOutlet weak var usernameTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var checkboxButton: UIButton!
+    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var createAccountButton: UIButton!
+    
+    private var isBoxChecked: Bool!
+    
+    struct User: Codable {
+        let email: String
+        let type: String
+        let id: String
+        enum CodingKeys: String, CodingKey {
+            case email
+            case type
+            case id = "_id"
+        }
+    }
+    struct LoginData: Codable {
+        let token: String
+    }
+    private var user: User?
+    private var loginData: LoginData?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        counter.text = "0"
-        // Do any additional setup after loading the view.
+        
+        usernameTextField.delegate = self
+        passwordTextField.delegate = self
+        
+        isBoxChecked = false
+        loginButton.layer.cornerRadius = 5
+        
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func boxTapped(_ sender: Any) {
+     
+        if isBoxChecked == true {
+            isBoxChecked = false
+        }else{
+            isBoxChecked = true
+        }
+        
+        if isBoxChecked == true{
+            checkboxButton.setImage(UIImage(named: "ic-checkbox-filled"), for: UIControlState.normal)
+        }else{
+            checkboxButton.setImage(UIImage(named: "ic-checkbox-empty"), for: UIControlState.normal)
+        }
     }
     
-   
-    @IBAction func buttonTapped(_ sender: UIButton) {
-        count += 1
-        counter.text = String(count)
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        usernameTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
     }
     
-    /*
-    // MARK: - Navigation
+    @IBAction private func loginButtonActionHandler() {
+        
+        SVProgressHUD.show()
+        
+            let parameters: [String: String] = [
+                "email": usernameTextField.text!,
+                "password": passwordTextField.text!
+            ]
+        
+            Alamofire.request("https://api.infinum.academy/api/users/sessions",
+                              method: .post,
+                              parameters: parameters,
+                              encoding: JSONEncoding.default)
+                .validate()
+                .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()){
+                        (response: DataResponse<LoginData>) in
+                    switch response.result {
+                        case .success(let parsedData):
+                            
+                            self.loginData = parsedData
+                            
+                            let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
+                            let homeViewController = homeStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+                            
+                            self.navigationController?.pushViewController(homeViewController, animated: true)
+                           // navigationController?.setViewControllers([homeViewController], animated: true)
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+                        case .failure(let error):
+                            print("API failure: \(error)")
+                    }
+                }
+        SVProgressHUD.dismiss()
+
+        
+        
     }
-    */
+    
+    
+    @IBAction private func createAccountActionHandler() {
+        
+        
+        let parameters: [String: String] = [
+            "email": usernameTextField.text!,
+            "password": passwordTextField.text!
+        ]
+        
+        Alamofire.request("https://api.infinum.academy/api/users",
+                          method: .post,
+                          parameters: parameters,
+                          encoding: JSONEncoding.default)
+            .validate()
+            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()){
+                (response: DataResponse<User>) in
+                switch response.result {
+                case .success(let parsedUser):
+                    
+                    self.user = parsedUser
+                    
+                    let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
+                    let homeViewController = homeStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+                    
+                    self.navigationController?.pushViewController(homeViewController, animated: true)
+                    // navigationController?.setViewControllers([homeViewController], animated: true)
+                    
+                case .failure(let error):
+                    print("API failure: \(error)")
+                }
+        }
+        SVProgressHUD.dismiss()
+    }
+}
 
+
+extension UIViewController : UITextFieldDelegate {
+    
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }
