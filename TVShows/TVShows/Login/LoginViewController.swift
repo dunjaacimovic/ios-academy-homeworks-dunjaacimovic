@@ -8,6 +8,8 @@
 
 import UIKit
 import Alamofire
+import SVProgressHUD
+import CodableAlamofire
 
 class LoginViewController: UIViewController {
     
@@ -32,6 +34,8 @@ class LoginViewController: UIViewController {
     struct LoginData: Codable {
         let token: String
     }
+    private var user: User?
+    private var loginData: LoginData?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,10 +91,44 @@ class LoginViewController: UIViewController {
     
     
     @IBAction private func createAccountActionHandler() {
-        let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
-        let homeViewController = homeStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
         
-        navigationController?.pushViewController(homeViewController, animated: true)
+        
+        let parameters: [String: String] = [
+            "email": usernameTextField.text!,
+            "password": passwordTextField.text!
+        ]
+        
+        Alamofire.request("https://api.infinum.academy/api/users",
+                          method: .post,
+                          parameters: parameters,
+                          encoding: JSONEncoding.default)
+            .validate()
+            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()){
+                (response: DataResponse<User>) in
+                switch response.result {
+                case .success(let parsedUser):
+                    //print("Success: \(parsedUser)")
+                    self.user = parsedUser
+                    //print(self.user?.email)
+                    //print("Success: \(user)")
+                    
+                    let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
+                    let homeViewController = homeStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+                    
+                    self.navigationController?.pushViewController(homeViewController, animated: true)
+                    // navigationController?.setViewControllers([homeViewController], animated: true)
+                    
+                case .failure(let error):
+                    print("API failure: \(error)")
+                }
+        }
+        SVProgressHUD.dismiss()
+
+        
+//        let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
+//        let homeViewController = homeStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+//
+//        navigationController?.pushViewController(homeViewController, animated: true)
     }
 }
 
