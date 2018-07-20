@@ -46,19 +46,6 @@ class LoginViewController: UIViewController {
         isBoxChecked = false
         loginButton.layer.cornerRadius = 5
         
-        let parameters: [String: String] = [
-            "email": email,
-            "password": password
-        ]
-        Alamofire.request("https://api.infinum.academy/api/users", method: .post, parameters: parameters, encoding: JSONEncoding.default).validate().responseDecodableObject(keyPath: "data", decoder: JSONDecoder()){
-                (response: DataResponse<User>) in
-            switch response.result {
-                case .success(let user):
-                    print("Success: \(user)")
-                case .failure(let error):
-                    print("API failure: \(error)")
-            }
-        }
     }
 
     @IBAction func boxTapped(_ sender: Any) {
