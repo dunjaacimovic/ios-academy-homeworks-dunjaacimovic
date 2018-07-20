@@ -69,11 +69,40 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction private func loginButtonActionHandler() {
-        let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
-        let homeViewController = homeStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
         
-        navigationController?.pushViewController(homeViewController, animated: true)
-        // navigationController?.setViewControllers([homeViewController], animated: true)
+        SVProgressHUD.show()
+        
+            let parameters: [String: String] = [
+                "email": usernameTextField.text!,
+                "password": passwordTextField.text!
+            ]
+        
+            Alamofire.request("https://api.infinum.academy/api/users/sessions",
+                              method: .post,
+                              parameters: parameters,
+                              encoding: JSONEncoding.default)
+                .validate()
+                .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()){
+                        (response: DataResponse<LoginData>) in
+                    switch response.result {
+                        case .success(let parsedData):
+                            
+                            self.loginData = parsedData
+                            
+                            let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
+                            let homeViewController = homeStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+                            
+                            self.navigationController?.pushViewController(homeViewController, animated: true)
+                           // navigationController?.setViewControllers([homeViewController], animated: true)
+
+                        case .failure(let error):
+                            print("API failure: \(error)")
+                    }
+                }
+        SVProgressHUD.dismiss()
+
+        
+        
     }
     
     
