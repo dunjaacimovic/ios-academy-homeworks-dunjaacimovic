@@ -123,10 +123,8 @@ class LoginViewController: UIViewController {
                 (response: DataResponse<User>) in
                 switch response.result {
                 case .success(let parsedUser):
-                    //print("Success: \(parsedUser)")
+                    
                     self.user = parsedUser
-                    //print(self.user?.email)
-                    //print("Success: \(user)")
                     
                     let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
                     let homeViewController = homeStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
@@ -139,12 +137,6 @@ class LoginViewController: UIViewController {
                 }
         }
         SVProgressHUD.dismiss()
-
-        
-//        let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
-//        let homeViewController = homeStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
-//
-//        navigationController?.pushViewController(homeViewController, animated: true)
     }
 }
 
