@@ -21,19 +21,6 @@ class LoginViewController: UIViewController {
     
     private var isBoxChecked: Bool!
     
-    struct User: Codable {
-        let email: String
-        let type: String
-        let id: String
-        enum CodingKeys: String, CodingKey {
-            case email
-            case type
-            case id = "_id"
-        }
-    }
-    struct LoginData: Codable {
-        let token: String
-    }
     private var user: User?
     private var loginData: LoginData?
     
@@ -47,23 +34,20 @@ class LoginViewController: UIViewController {
         loginButton.layer.cornerRadius = 5
         
     }
-
+    
     @IBAction func boxTapped(_ sender: Any) {
-     
-        if isBoxChecked == true {
-            isBoxChecked = false
-        }else{
-            isBoxChecked = true
-        }
         
-        if isBoxChecked == true{
+        isBoxChecked = !isBoxChecked
+        
+        if isBoxChecked {
             checkboxButton.setImage(UIImage(named: "ic-checkbox-filled"), for: UIControlState.normal)
-        }else{
+        } else {
             checkboxButton.setImage(UIImage(named: "ic-checkbox-empty"), for: UIControlState.normal)
         }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
         usernameTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
     }
@@ -72,37 +56,34 @@ class LoginViewController: UIViewController {
         
         SVProgressHUD.show()
         
-            let parameters: [String: String] = [
-                "email": usernameTextField.text!,
-                "password": passwordTextField.text!
-            ]
+        let parameters: [String: String] = [
+            "email": usernameTextField.text!,
+            "password": passwordTextField.text!
+        ]
         
-            Alamofire.request("https://api.infinum.academy/api/users/sessions",
-                              method: .post,
-                              parameters: parameters,
-                              encoding: JSONEncoding.default)
-                .validate()
-                .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()){
-                        (response: DataResponse<LoginData>) in
-                    switch response.result {
-                        case .success(let parsedData):
-                            
-                            self.loginData = parsedData
-                            
-                            let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
-                            let homeViewController = homeStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
-                            
-                            self.navigationController?.pushViewController(homeViewController, animated: true)
-                           // navigationController?.setViewControllers([homeViewController], animated: true)
-
-                        case .failure(let error):
-                            print("API failure: \(error)")
-                    }
+        Alamofire.request("https://api.infinum.academy/api/users/sessions",
+                          method: .post,
+                          parameters: parameters,
+                          encoding: JSONEncoding.default)
+            .validate()
+            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()){
+                (response: DataResponse<LoginData>) in
+                switch response.result {
+                case .success(let parsedData):
+                    
+                    self.loginData = parsedData
+                    
+                    let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
+                    let homeViewController = homeStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+                    
+                    self.navigationController?.pushViewController(homeViewController, animated: true)
+                    // navigationController?.setViewControllers([homeViewController], animated: true)
+                    
+                case .failure(let error):
+                    print("API failure: \(error)")
                 }
+        }
         SVProgressHUD.dismiss()
-
-        
-        
     }
     
     
