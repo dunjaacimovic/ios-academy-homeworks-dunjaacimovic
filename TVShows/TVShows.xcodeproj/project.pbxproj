@@ -16,6 +16,7 @@
 		5C9ADD2B20EE6F2500F9680E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C9ADD2A20EE6F2500F9680E /* Assets.xcassets */; };
 		5C9ADD3920EE6F2500F9680E /* TVShowsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9ADD3820EE6F2500F9680E /* TVShowsTests.swift */; };
 		5C9ADD4420EE6F2500F9680E /* TVShowsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9ADD4320EE6F2500F9680E /* TVShowsUITests.swift */; };
+		5CB803B62107365F002296AF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB803B52107365F002296AF /* User.swift */; };
 		B4908BB37DDAE278C406E82B /* Pods_TVShowsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34544F359DF99D2A3617A952 /* Pods_TVShowsUITests.framework */; };
 		DD6664D37653BBAC7DE3F2F3 /* Pods_TVShowsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4C3175B00A99BCDED866CF0 /* Pods_TVShowsTests.framework */; };
 /* End PBXBuildFile section */
@@ -56,6 +57,7 @@
 		5C9ADD3F20EE6F2500F9680E /* TVShowsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TVShowsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C9ADD4320EE6F2500F9680E /* TVShowsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowsUITests.swift; sourceTree = "<group>"; };
 		5C9ADD4520EE6F2500F9680E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5CB803B52107365F002296AF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		76B5AE3BDB6F81BCEAA01062 /* Pods-TVShowsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TVShowsUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TVShowsUITests/Pods-TVShowsUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		BB6E0B305D00571B55DA1FF6 /* Pods-TVShows.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TVShows.release.xcconfig"; path = "Pods/Target Support Files/Pods-TVShows/Pods-TVShows.release.xcconfig"; sourceTree = "<group>"; };
 		CF9FF55D3C5410021EF48F92 /* Pods-TVShows.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TVShows.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TVShows/Pods-TVShows.debug.xcconfig"; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 			children = (
 				5C7FEF1320F2501A00149936 /* Login.storyboard */,
 				5C7FEF1520F2503500149936 /* LoginViewController.swift */,
+				5CB803B52107365F002296AF /* User.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -390,6 +393,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CB803B62107365F002296AF /* User.swift in Sources */,
 				5C7FEF1620F2503500149936 /* LoginViewController.swift in Sources */,
 				5C9ADD2420EE6F2400F9680E /* AppDelegate.swift in Sources */,
 				5C0B32BC20FF23400046EBB1 /* HomeViewController.swift in Sources */,

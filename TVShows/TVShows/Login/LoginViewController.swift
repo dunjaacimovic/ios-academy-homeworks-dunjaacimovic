@@ -21,19 +21,6 @@ class LoginViewController: UIViewController {
     
     private var isBoxChecked: Bool!
     
-    struct User: Codable {
-        let email: String
-        let type: String
-        let id: String
-        enum CodingKeys: String, CodingKey {
-            case email
-            case type
-            case id = "_id"
-        }
-    }
-    struct LoginData: Codable {
-        let token: String
-    }
     private var user: User?
     private var loginData: LoginData?
     
@@ -49,21 +36,18 @@ class LoginViewController: UIViewController {
     }
 
     @IBAction func boxTapped(_ sender: Any) {
-     
-        if isBoxChecked == true {
-            isBoxChecked = false
-        }else{
-            isBoxChecked = true
-        }
+
+        isBoxChecked = !isBoxChecked
         
-        if isBoxChecked == true{
+        if isBoxChecked {
             checkboxButton.setImage(UIImage(named: "ic-checkbox-filled"), for: UIControlState.normal)
-        }else{
+        } else {
             checkboxButton.setImage(UIImage(named: "ic-checkbox-empty"), for: UIControlState.normal)
         }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
         usernameTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
     }
@@ -100,9 +84,6 @@ class LoginViewController: UIViewController {
                     }
                 }
         SVProgressHUD.dismiss()
-
-        
-        
     }
     
     
