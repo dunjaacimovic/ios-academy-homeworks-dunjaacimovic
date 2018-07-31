@@ -12,6 +12,7 @@ import CodableAlamofire
 import SVProgressHUD
 
 
+
 class HomeViewController: UIViewController {
     
     private var TVShows: [TVShow] = []
@@ -30,6 +31,9 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         navigationItem.hidesBackButton = true
         loadShows(token: _token)
+        
+        
+        
     }
 }
 
@@ -76,7 +80,12 @@ private extension HomeViewController {
     }
 }
 
+
 extension HomeViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 150
+    }
     
 }
 

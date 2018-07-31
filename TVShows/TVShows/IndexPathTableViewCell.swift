@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Kingfisher
 
 import UIKit
 
@@ -18,6 +19,9 @@ import UIKit
 class IndexPathTableViewCell: UITableViewCell {
     
     @IBOutlet private weak var indexPathLabel: UILabel!
+    @IBOutlet weak var tvShowImageView: UIImageView!
+    
+    
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -26,5 +30,9 @@ class IndexPathTableViewCell: UITableViewCell {
     
     func configure(with item: TVShow){
         indexPathLabel.text = item.title
+        
+        let url = URL(string: "https://api.infinum.academy" + item.imageUrl)
+        tvShowImageView.kf.setImage(with: url)
+        
     }
 }
