@@ -157,17 +157,17 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="9dW-Zm-MDC">
                                 <rect key="frame" x="0.0" y="64" width="375" height="270"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="officeImage" translatesAutoresizingMaskIntoConstraints="NO" id="euF-vE-euu">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="229.5"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="euF-vE-euu">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="211"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p1f-sv-Y65">
-                                        <rect key="frame" x="0.0" y="238.5" width="375" height="14"/>
+                                        <rect key="frame" x="0.0" y="220" width="375" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ety-Mg-rKt">
-                                        <rect key="frame" x="0.0" y="261.5" width="375" height="8.5"/>
+                                        <rect key="frame" x="0.0" y="249.5" width="375" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -219,6 +219,7 @@
                         <outlet property="episodeNumber" destination="uj0-Hx-3ay" id="Vch-qg-upK"/>
                         <outlet property="episodeTableView" destination="siv-Ca-iKE" id="V5m-cO-BXL"/>
                         <outlet property="titleLabel" destination="p1f-sv-Y65" id="3sB-Me-ZkN"/>
+                        <outlet property="tvShowImageView" destination="euF-vE-euu" id="O9z-pz-ZHI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="72w-Cs-S34" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -314,6 +315,5 @@
         <image name="ic-camera" width="24" height="24"/>
         <image name="ic-fab-button" width="68" height="74"/>
         <image name="ic-navigate-back" width="32" height="32"/>
-        <image name="officeImage" width="590" height="332"/>
     </resources>
 </document>
