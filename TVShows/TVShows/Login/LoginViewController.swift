@@ -75,12 +75,16 @@ class LoginViewController: UIViewController {
                     
                     let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
                     let homeViewController = homeStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
-                    
-                    self.navigationController?.pushViewController(homeViewController, animated: true)
-                    // navigationController?.setViewControllers([homeViewController], animated: true)
-                    
+                    homeViewController.configure(with: parsedData.token)
+                    self.navigationController?.pushViewController(homeViewController, animated: true)                    
                 case .failure(let error):
                     print("API failure: \(error)")
+                    let alertController = UIAlertController(title: "Login error", message: "Wrong e-mail or password.", preferredStyle: .alert)
+                    let action2 = UIAlertAction(title: "Cancel", style: .cancel) { (action:UIAlertAction) in
+                        print("You've pressed cancel");
+                        }
+                    alertController.addAction(action2)
+                    self.present(alertController, animated: true)
                 }
         }
         SVProgressHUD.dismiss()
@@ -109,6 +113,7 @@ class LoginViewController: UIViewController {
                     
                     let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
                     let homeViewController = homeStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+                    
                     
                     self.navigationController?.pushViewController(homeViewController, animated: true)
                     // navigationController?.setViewControllers([homeViewController], animated: true)
