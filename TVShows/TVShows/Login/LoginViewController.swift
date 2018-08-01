@@ -61,6 +61,49 @@ class LoginViewController: UIViewController {
             "password": passwordTextField.text!
         ]
         
+        login(parameters: parameters)
+    }
+    
+    
+    @IBAction private func createAccountActionHandler() {
+        
+        
+        let parameters: [String: String] = [
+            "email": usernameTextField.text!,
+            "password": passwordTextField.text!
+        ]
+        
+        Alamofire.request("https://api.infinum.academy/api/users",
+                          method: .post,
+                          parameters: parameters,
+                          encoding: JSONEncoding.default)
+            .validate()
+            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()){
+                (response: DataResponse<User>) in
+                switch response.result {
+                case .success(let parsedUser):
+                    
+                    self.user = parsedUser
+                    
+                    let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
+                    let homeViewController = homeStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+                    
+                    
+                    self.navigationController?.pushViewController(homeViewController, animated: true)
+                    // navigationController?.setViewControllers([homeViewController], animated: true)
+                    
+                case .failure(let error):
+                    print("API failure: \(error)")
+                }
+        }
+        SVProgressHUD.dismiss()
+    }
+}
+
+extension LoginViewController {
+    
+    func login(parameters: [String:String]){
+        
         Alamofire.request("https://api.infinum.academy/api/users/sessions",
                           method: .post,
                           parameters: parameters,
@@ -82,7 +125,7 @@ class LoginViewController: UIViewController {
                     let alertController = UIAlertController(title: "Login error", message: "Wrong e-mail or password.", preferredStyle: .alert)
                     let action2 = UIAlertAction(title: "Cancel", style: .cancel) { (action:UIAlertAction) in
                         print("You've pressed cancel");
-                        }
+                    }
                     alertController.addAction(action2)
                     self.present(alertController, animated: true)
                 }
