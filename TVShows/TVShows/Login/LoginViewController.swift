@@ -119,7 +119,15 @@ extension LoginViewController {
                     let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
                     let homeViewController = homeStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
                     homeViewController.configure(with: parsedData.token)
-                    self.navigationController?.pushViewController(homeViewController, animated: true)                    
+                    self.navigationController?.pushViewController(homeViewController, animated: true)
+                    
+                    if(self.isBoxChecked){
+                        if let email = self.usernameTextField.text, let password = self.passwordTextField.text {
+                            UserDefaults.standard.set(email, forKey: "TVShows.email")
+                            UserDefaults.standard.set(password, forKey: "TVShows.password")
+                        }
+                    }
+                    
                 case .failure(let error):
                     print("API failure: \(error)")
                     let alertController = UIAlertController(title: "Login error", message: "Wrong e-mail or password.", preferredStyle: .alert)
