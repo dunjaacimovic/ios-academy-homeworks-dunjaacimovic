@@ -33,6 +33,7 @@ class LoginViewController: UIViewController {
         isBoxChecked = false
         loginButton.layer.cornerRadius = 5
         
+        loginRememberedUser()
     }
     
     @IBAction func boxTapped(_ sender: Any) {
