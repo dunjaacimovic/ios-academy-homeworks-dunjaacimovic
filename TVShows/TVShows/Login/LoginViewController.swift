@@ -141,39 +141,19 @@ extension LoginViewController {
         SVProgressHUD.dismiss()
     }
     
-    
-    @IBAction private func createAccountActionHandler() {
+    func loginRememberedUser(){
+
         
-        
-        let parameters: [String: String] = [
-            "email": usernameTextField.text!,
-            "password": passwordTextField.text!
-        ]
-        
-        Alamofire.request("https://api.infinum.academy/api/users",
-                          method: .post,
-                          parameters: parameters,
-                          encoding: JSONEncoding.default)
-            .validate()
-            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()){
-                (response: DataResponse<User>) in
-                switch response.result {
-                case .success(let parsedUser):
-                    
-                    self.user = parsedUser
-                    
-                    let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
-                    let homeViewController = homeStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
-                    
-                    
-                    self.navigationController?.pushViewController(homeViewController, animated: true)
-                    // navigationController?.setViewControllers([homeViewController], animated: true)
-                    
-                case .failure(let error):
-                    print("API failure: \(error)")
-                }
+        if
+            let email = UserDefaults.standard.string(forKey: "TVShows.email"),
+            let password = UserDefaults.standard.string(forKey: "TVShows.password"){
+            let rememberedParameters: [String: String] = [
+                "email": email,
+                "password": password
+            ]
+            
+            login(parameters: rememberedParameters)
         }
-        SVProgressHUD.dismiss()
     }
 }
 
