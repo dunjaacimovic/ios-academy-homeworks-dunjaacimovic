@@ -46,7 +46,6 @@ class AddEpViewController: UIViewController {
         
         let parameters: [String: String] = [
             "showId": showId,
-//??
             "mediaId": "",
             "title": epTitleTextField.text!,
             "description": epDescriptionTextField.text!,
