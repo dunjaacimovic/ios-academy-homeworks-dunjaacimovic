@@ -137,6 +137,15 @@ extension LoginViewController {
                     }
                     alertController.addAction(action2)
                     self.present(alertController, animated: true)
+                    
+                    let animation = CABasicAnimation(keyPath: "position")
+                    animation.duration = 0.07
+                    animation.repeatCount = 4
+                    animation.autoreverses = true
+                    animation.fromValue = NSValue(cgPoint: CGPoint(x: self.passwordTextField.center.x - 10, y: self.passwordTextField.center.y))
+                    animation.toValue = NSValue(cgPoint: CGPoint(x: self.passwordTextField.center.x + 10, y: self.passwordTextField.center.y))
+                    self.passwordTextField.layer.add(animation, forKey: "position")
+                    
                 }
         }
         SVProgressHUD.dismiss()
