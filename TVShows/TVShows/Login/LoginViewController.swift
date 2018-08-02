@@ -26,6 +26,8 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        navigationItem.hidesBackButton = true
         
         usernameTextField.delegate = self
         passwordTextField.delegate = self
@@ -33,6 +35,7 @@ class LoginViewController: UIViewController {
         isBoxChecked = false
         loginButton.layer.cornerRadius = 5
         
+        loginRememberedUser()
     }
     
     @IBAction func boxTapped(_ sender: Any) {
@@ -61,33 +64,7 @@ class LoginViewController: UIViewController {
             "password": passwordTextField.text!
         ]
         
-        Alamofire.request("https://api.infinum.academy/api/users/sessions",
-                          method: .post,
-                          parameters: parameters,
-                          encoding: JSONEncoding.default)
-            .validate()
-            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()){
-                (response: DataResponse<LoginData>) in
-                switch response.result {
-                case .success(let parsedData):
-                    
-                    self.loginData = parsedData
-                    
-                    let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
-                    let homeViewController = homeStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
-                    homeViewController.configure(with: parsedData.token)
-                    self.navigationController?.pushViewController(homeViewController, animated: true)                    
-                case .failure(let error):
-                    print("API failure: \(error)")
-                    let alertController = UIAlertController(title: "Login error", message: "Wrong e-mail or password.", preferredStyle: .alert)
-                    let action2 = UIAlertAction(title: "Cancel", style: .cancel) { (action:UIAlertAction) in
-                        print("You've pressed cancel");
-                        }
-                    alertController.addAction(action2)
-                    self.present(alertController, animated: true)
-                }
-        }
-        SVProgressHUD.dismiss()
+        login(parameters: parameters)
     }
     
     
@@ -123,6 +100,72 @@ class LoginViewController: UIViewController {
                 }
         }
         SVProgressHUD.dismiss()
+    }
+}
+
+extension LoginViewController {
+    
+    func login(parameters: [String:String]){
+        
+        Alamofire.request("https://api.infinum.academy/api/users/sessions",
+                          method: .post,
+                          parameters: parameters,
+                          encoding: JSONEncoding.default)
+            .validate()
+            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()){
+                (response: DataResponse<LoginData>) in
+                switch response.result {
+                case .success(let parsedData):
+                    
+                    self.loginData = parsedData
+                    
+                    let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
+                    let homeViewController = homeStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+                    homeViewController.configure(with: parsedData.token)
+                    self.navigationController?.pushViewController(homeViewController, animated: true)
+                    
+                    if(self.isBoxChecked){
+                        if let email = self.usernameTextField.text, let password = self.passwordTextField.text {
+                            UserDefaults.standard.set(email, forKey: "TVShows.email")
+                            UserDefaults.standard.set(password, forKey: "TVShows.password")
+                        }
+                    }
+                    
+                case .failure(let error):
+                    print("API failure: \(error)")
+                    let alertController = UIAlertController(title: "Login error", message: "Wrong e-mail or password.", preferredStyle: .alert)
+                    let action2 = UIAlertAction(title: "Cancel", style: .cancel) { (action:UIAlertAction) in
+                        print("You've pressed cancel");
+                    }
+                    alertController.addAction(action2)
+                    self.present(alertController, animated: true)
+                    
+                    let animation = CABasicAnimation(keyPath: "position")
+                    animation.duration = 0.07
+                    animation.repeatCount = 4
+                    animation.autoreverses = true
+                    animation.fromValue = NSValue(cgPoint: CGPoint(x: self.passwordTextField.center.x - 10, y: self.passwordTextField.center.y))
+                    animation.toValue = NSValue(cgPoint: CGPoint(x: self.passwordTextField.center.x + 10, y: self.passwordTextField.center.y))
+                    self.passwordTextField.layer.add(animation, forKey: "position")
+                    
+                }
+        }
+        SVProgressHUD.dismiss()
+    }
+    
+    func loginRememberedUser(){
+
+        
+        if
+            let email = UserDefaults.standard.string(forKey: "TVShows.email"),
+            let password = UserDefaults.standard.string(forKey: "TVShows.password"){
+            let rememberedParameters: [String: String] = [
+                "email": email,
+                "password": password
+            ]
+            
+            login(parameters: rememberedParameters)
+        }
     }
 }
 

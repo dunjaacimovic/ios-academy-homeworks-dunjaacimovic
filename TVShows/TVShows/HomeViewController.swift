@@ -12,6 +12,7 @@ import CodableAlamofire
 import SVProgressHUD
 
 
+
 class HomeViewController: UIViewController {
     
     private var TVShows: [TVShow] = []
@@ -30,7 +31,26 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         navigationItem.hidesBackButton = true
         loadShows(token: _token)
+        
+        let logoutItem = UIBarButtonItem.init(image: UIImage(named: "ic-logout"),
+                                              style: .plain,
+                                              target: self,
+                                              action: #selector(_logoutActionHandler))
+        navigationItem.leftBarButtonItem = logoutItem
     }
+    
+    @objc private func _logoutActionHandler() {
+        UserDefaults.standard.removeObject(forKey: "TVShows.email")
+        UserDefaults.standard.removeObject(forKey: "TVShows.password")
+
+        
+        let loginStoryboard = UIStoryboard(name: "Login", bundle: nil)
+        let loginViewController = loginStoryboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+        
+        
+        self.navigationController?.pushViewController(loginViewController, animated: true)
+    }
+    
 }
 
 extension HomeViewController {
@@ -76,7 +96,12 @@ private extension HomeViewController {
     }
 }
 
+
 extension HomeViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 150
+    }
     
 }
 

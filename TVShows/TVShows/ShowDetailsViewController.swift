@@ -29,6 +29,7 @@ class ShowDetailsViewController: UIViewController {
         }
     }
     
+    @IBOutlet weak var tvShowImageView: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -106,6 +107,13 @@ private extension ShowDetailsViewController {
                     self.titleLabel.text = self.showDetails?.title
                     self.titleLabel.text = self.showDetails?.description
                     self.loadEpisodes()
+                    
+                    guard let imageUrl = self.showDetails?.imageUrl else {
+                        return
+                    }
+                    let url = URL(string: "https://api.infinum.academy" + imageUrl)
+                    self.tvShowImageView.kf.setImage(with: url)
+                    
                 case .failure:
                     let alertController = UIAlertController(title: "Data reaching error", message: "Could not show data.", preferredStyle: .alert)
                     let action1 = UIAlertAction(title: "Cancel", style: .cancel) { (action:UIAlertAction) in
