@@ -46,11 +46,18 @@ class ShowDetailsViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
-        if segue.identifier == "AddEpSegue",
-            let nextScene = segue.destination as? AddEpViewController{
-                nextScene.showId = showID
-            
-                nextScene.delegate = self
+        
+        if segue.identifier == "EpDetailsSegue",
+            let nextScene = segue.destination as? EpDetailsViewController,
+            let indexPath = self.episodeTableView.indexPathForSelectedRow{
+            let selectedRow = episodes[indexPath.row]
+            nextScene.episodeTitle = selectedRow.title
+            nextScene.episodeDescription = selectedRow.description
+            nextScene.episodeNumber = selectedRow.episodeNumber
+            nextScene.seasonNumber = selectedRow.season
+            nextScene.episodeImageUrl = selectedRow.imageUrl
+            nextScene.token = token
+            nextScene.episodeId = selectedRow.id
         }
     }
     
