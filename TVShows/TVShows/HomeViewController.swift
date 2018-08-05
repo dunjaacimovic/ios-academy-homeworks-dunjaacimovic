@@ -15,7 +15,11 @@ import SVProgressHUD
 
 class HomeViewController: UIViewController {
     
-    private var TVShows: [TVShow] = []
+    private var TVShows: [TVShow] = []{
+        didSet{
+            tableView.reloadData()
+        }
+    }
     
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var tableView: UITableView! {
@@ -81,7 +85,7 @@ private extension HomeViewController {
                 case .success(let parsedData):
                     
                     self.TVShows = parsedData
-                    self.tableView.reloadData()
+                    
                 case .failure:
                     let alertController = UIAlertController(title: "Data reaching error", message: "Could not show data.", preferredStyle: .alert)
                     let action1 = UIAlertAction(title: "Cancel", style: .cancel) { (action:UIAlertAction) in
