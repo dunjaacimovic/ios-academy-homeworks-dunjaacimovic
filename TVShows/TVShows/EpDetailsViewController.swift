@@ -38,7 +38,7 @@ class EpDetailsViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        navigationController?.setNavigationBarHidden(true, animated: true)
     }
 
     @IBAction func backButton(_ sender: UIButton) {

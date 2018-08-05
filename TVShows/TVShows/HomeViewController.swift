@@ -48,7 +48,7 @@ class HomeViewController: UIViewController {
         let loginViewController = loginStoryboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
         
         
-        self.navigationController?.pushViewController(loginViewController, animated: true)
+        navigationController?.pushViewController(loginViewController, animated: true)
     }
     
 }
