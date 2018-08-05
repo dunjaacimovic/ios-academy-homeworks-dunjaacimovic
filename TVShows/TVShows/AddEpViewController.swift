@@ -93,8 +93,10 @@ extension AddEpViewController {
     
     func processUploadRequest(_ uploadRequest: UploadRequest) {
             uploadRequest
-                .responseDecodableObject(keyPath: "data") { (response:
+                .responseDecodableObject(keyPath: "data") { [weak self](response:
                     DataResponse<Media>) in
+                    guard let `self` = self else { return }
+                    
                 switch response.result {
                 case .success(let media):
                     self.mediaId = media.id
@@ -125,7 +127,9 @@ extension AddEpViewController {
                      encoding: JSONEncoding.default,
                      headers: headers)
             .validate()
-            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { (response: DataResponse<Episode>) in
+            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { [weak self] (response: DataResponse<Episode>) in
+                guard let `self` = self else { return }
+                
                 switch response.result {
                 case .success(_):
                     self.delegate?.reloadIsNeeded(true)

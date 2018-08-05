@@ -75,9 +75,7 @@ private extension HomeViewController {
             .responseDecodableObject(keyPath: "data") { [weak self] (response: DataResponse<[TVShow]>) in
                 SVProgressHUD.dismiss()
 
-                guard let `self` = self else {
-                    return
-                }
+                guard let `self` = self else { return }
 
                 switch response.result {
                 case .success(let parsedData):

@@ -82,7 +82,10 @@ class LoginViewController: UIViewController {
                           encoding: JSONEncoding.default)
             .validate()
             .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()){
+                [weak self]
                 (response: DataResponse<User>) in
+                guard let `self` = self else { return }
+                
                 switch response.result {
                 case .success(let parsedUser):
                     
@@ -113,7 +116,10 @@ extension LoginViewController {
                           encoding: JSONEncoding.default)
             .validate()
             .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()){
+                [weak self]
                 (response: DataResponse<LoginData>) in
+                guard let `self` = self else { return }
+                
                 switch response.result {
                 case .success(let parsedData):
                     
