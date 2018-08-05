@@ -63,6 +63,8 @@ class ShowDetailsViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Home", bundle: nil)
         let addEpisodeViewController = storyboard.instantiateViewController(withIdentifier: "AddEpViewController") as! AddEpViewController
         addEpisodeViewController.token = token
+        addEpisodeViewController.showId = showID
+        addEpisodeViewController.delegate = self
         
         let navigationController = UINavigationController(rootViewController: addEpisodeViewController)
     
@@ -187,7 +189,7 @@ extension ShowDetailsViewController: UITableViewDataSource {
 extension ShowDetailsViewController: AddEpViewControllerDelegate {
     func reloadIsNeeded(_ reloadNeeded: Bool?){
         if (reloadNeeded == true){
-            episodeTableView.reloadData()
+            loadEpisodes()
         }
     }
 }
