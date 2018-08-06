@@ -15,7 +15,11 @@ import SVProgressHUD
 
 class HomeViewController: UIViewController {
     
-    private var TVShows: [TVShow] = []
+    private var TVShows: [TVShow] = []{
+        didSet{
+            tableView.reloadData()
+        }
+    }
     
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var tableView: UITableView! {
@@ -48,7 +52,7 @@ class HomeViewController: UIViewController {
         let loginViewController = loginStoryboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
         
         
-        self.navigationController?.pushViewController(loginViewController, animated: true)
+        navigationController?.pushViewController(loginViewController, animated: true)
     }
     
 }
@@ -75,15 +79,13 @@ private extension HomeViewController {
             .responseDecodableObject(keyPath: "data") { [weak self] (response: DataResponse<[TVShow]>) in
                 SVProgressHUD.dismiss()
 
-                guard let `self` = self else {
-                    return
-                }
+                guard let `self` = self else { return }
 
                 switch response.result {
                 case .success(let parsedData):
                     
                     self.TVShows = parsedData
-                    self.tableView.reloadData()
+                    
                 case .failure:
                     let alertController = UIAlertController(title: "Data reaching error", message: "Could not show data.", preferredStyle: .alert)
                     let action1 = UIAlertAction(title: "Cancel", style: .cancel) { (action:UIAlertAction) in

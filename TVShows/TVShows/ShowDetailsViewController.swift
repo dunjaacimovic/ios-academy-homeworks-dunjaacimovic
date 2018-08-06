@@ -42,15 +42,22 @@ class ShowDetailsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
-        if segue.identifier == "AddEpSegue",
-            let nextScene = segue.destination as? AddEpViewController{
-                nextScene.showId = showID
-            
-                nextScene.delegate = self
+        
+        if segue.identifier == "EpDetailsSegue",
+            let nextScene = segue.destination as? EpDetailsViewController,
+            let indexPath = self.episodeTableView.indexPathForSelectedRow{
+            let selectedRow = episodes[indexPath.row]
+            nextScene.episodeTitle = selectedRow.title
+            nextScene.episodeDescription = selectedRow.description
+            nextScene.episodeNumber = selectedRow.episodeNumber
+            nextScene.seasonNumber = selectedRow.season
+            nextScene.episodeImageUrl = selectedRow.imageUrl
+            nextScene.token = token
+            nextScene.episodeId = selectedRow.id
         }
     }
     
@@ -63,6 +70,8 @@ class ShowDetailsViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Home", bundle: nil)
         let addEpisodeViewController = storyboard.instantiateViewController(withIdentifier: "AddEpViewController") as! AddEpViewController
         addEpisodeViewController.token = token
+        addEpisodeViewController.showId = showID
+        addEpisodeViewController.delegate = self
         
         let navigationController = UINavigationController(rootViewController: addEpisodeViewController)
     
@@ -187,7 +196,7 @@ extension ShowDetailsViewController: UITableViewDataSource {
 extension ShowDetailsViewController: AddEpViewControllerDelegate {
     func reloadIsNeeded(_ reloadNeeded: Bool?){
         if (reloadNeeded == true){
-            episodeTableView.reloadData()
+            loadEpisodes()
         }
     }
 }

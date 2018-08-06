@@ -82,7 +82,10 @@ class LoginViewController: UIViewController {
                           encoding: JSONEncoding.default)
             .validate()
             .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()){
+                [weak self]
                 (response: DataResponse<User>) in
+                guard let `self` = self else { return }
+                
                 switch response.result {
                 case .success(let parsedUser):
                     
@@ -113,7 +116,10 @@ extension LoginViewController {
                           encoding: JSONEncoding.default)
             .validate()
             .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()){
+                [weak self]
                 (response: DataResponse<LoginData>) in
+                guard let `self` = self else { return }
+                
                 switch response.result {
                 case .success(let parsedData):
                     
@@ -140,13 +146,7 @@ extension LoginViewController {
                     alertController.addAction(action2)
                     self.present(alertController, animated: true)
                     
-                    let animation = CABasicAnimation(keyPath: "position")
-                    animation.duration = 0.07
-                    animation.repeatCount = 4
-                    animation.autoreverses = true
-                    animation.fromValue = NSValue(cgPoint: CGPoint(x: self.passwordTextField.center.x - 10, y: self.passwordTextField.center.y))
-                    animation.toValue = NSValue(cgPoint: CGPoint(x: self.passwordTextField.center.x + 10, y: self.passwordTextField.center.y))
-                    self.passwordTextField.layer.add(animation, forKey: "position")
+                    self.shakeTextField(self.passwordTextField)
                     
                 }
         }
@@ -166,6 +166,16 @@ extension LoginViewController {
             
             login(parameters: rememberedParameters)
         }
+    }
+    
+    func shakeTextField(_ textfield: UITextField){
+        let animation = CABasicAnimation(keyPath: "position")
+        animation.duration = 0.07
+        animation.repeatCount = 4
+        animation.autoreverses = true
+        animation.fromValue = NSValue(cgPoint: CGPoint(x: textfield.center.x - 10, y: textfield.center.y))
+        animation.toValue = NSValue(cgPoint: CGPoint(x: textfield.center.x + 10, y: textfield.center.y))
+        textfield.layer.add(animation, forKey: "position")
     }
 }
 
