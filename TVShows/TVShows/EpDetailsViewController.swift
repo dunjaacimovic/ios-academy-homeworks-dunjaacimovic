@@ -26,15 +26,15 @@ class EpDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.epTitle.text = episodeTitle
-        self.epNumber.text = "S" + seasonNumber + " Ep" + episodeNumber
-        self.epDescription.text = episodeDescription
+        epTitle.text = episodeTitle
+        epNumber.text = "S" + seasonNumber + " Ep" + episodeNumber
+        epDescription.text = episodeDescription
         
         guard let imageUrl = self.episodeImageUrl else {
             return
         }
         let url = URL(string: "https://api.infinum.academy" + imageUrl)
-        self.epImage.kf.setImage(with: url)
+        epImage.kf.setImage(with: url)
     }
 
     override func viewWillAppear(_ animated: Bool) {
