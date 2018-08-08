@@ -87,12 +87,7 @@ private extension HomeViewController {
                     self.TVShows = parsedData
                     
                 case .failure:
-                    let alertController = UIAlertController(title: "Data reaching error", message: "Could not show data.", preferredStyle: .alert)
-                    let action1 = UIAlertAction(title: "Cancel", style: .cancel) { (action:UIAlertAction) in
-                        print("You've pressed cancel");
-                    }
-                    alertController.addAction(action1)
-                    self.present(alertController, animated: true)
+                    self.alert()
                 }
         }
     }
@@ -121,10 +116,6 @@ extension HomeViewController: UITableViewDataSource {
         return cell
     }
     
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        self.performSegue(withIdentifier: "ShowDetailsSegue", sender: self)
-//    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
         if segue.identifier == "ShowDetailsSegue",
         let nextScene = segue.destination as? ShowDetailsViewController,
@@ -133,6 +124,13 @@ extension HomeViewController: UITableViewDataSource {
             nextScene.showID = selectedRow.id
             nextScene.token = _token
         }
+    }
+    
+    func alert(){
+        let alertController = UIAlertController(title: "Data reaching error", message: "Could not show data.", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Cancel", style: .cancel) { (action:UIAlertAction) in print("You've pressed cancel"); }
+        alertController.addAction(action)
+        self.present(alertController, animated: true)
     }
 }
 

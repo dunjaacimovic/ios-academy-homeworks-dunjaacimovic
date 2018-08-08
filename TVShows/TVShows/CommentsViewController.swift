@@ -79,12 +79,7 @@ class CommentsViewController: UIViewController {
                         self.addCommentTextField.text = ""
     
                     case .failure:
-                        let alertController = UIAlertController(title: "Comment error", message: "Could not post comment.", preferredStyle: .alert)
-                        let action1 = UIAlertAction(title: "Cancel", style: .cancel) { (action:UIAlertAction) in
-                            print("You've pressed cancel");
-                        }
-                        alertController.addAction(action1)
-                        self.present(alertController, animated: true)
+                        self.alert("Comment error.", "Could not post comment.")
                     }
     
                     SVProgressHUD.dismiss()
@@ -114,16 +109,18 @@ extension CommentsViewController{
                     self.commentsTableView.reloadData()
                     
                 case .failure:
-                    let alertController = UIAlertController(title: "Data reaching error", message: "Could not show data.", preferredStyle: .alert)
-                    let action1 = UIAlertAction(title: "Cancel", style: .cancel) { (action:UIAlertAction) in
-                        print("You've pressed cancel");
-                    }
-                    alertController.addAction(action1)
-                    self.present(alertController, animated: true)
+                    self.alert("Data reaching error", "Could not show data.")
                 }
                 
                 SVProgressHUD.dismiss()
         }
+    }
+    
+    func alert(_ alertTitle: String, _ alertMessage: String){
+        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+        let action = UIAlertAction(title: "Cancel", style: .cancel) { (action:UIAlertAction) in print("You've pressed cancel"); }
+        alertController.addAction(action)
+        self.present(alertController, animated: true)
     }
 }
 

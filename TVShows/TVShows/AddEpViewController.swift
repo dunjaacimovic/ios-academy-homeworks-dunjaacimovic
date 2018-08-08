@@ -122,14 +122,18 @@ extension AddEpViewController {
                     self.delegate?.reloadIsNeeded(true)
                     self.dismiss(animated: true)
                 case .failure(_):
-                    let alertController = UIAlertController(title: "Data reaching error", message: "Could not show data.", preferredStyle: .alert)
-                    let action1 = UIAlertAction(title: "Cancel", style: .cancel) { (action:UIAlertAction) in
-                        print("You've pressed cancel");
-                    }
-                    alertController.addAction(action1)
-                    self.present(alertController, animated: true)
+                    self.alert()
                 }
         }
+    }
+    
+    func alert(){
+        let alertController = UIAlertController(title: "Data reaching error", message: "Could not show data.", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Cancel", style: .cancel) { (action:UIAlertAction) in
+            print("You've pressed cancel");
+        }
+        alertController.addAction(action)
+        self.present(alertController, animated: true)
     }
 }
 

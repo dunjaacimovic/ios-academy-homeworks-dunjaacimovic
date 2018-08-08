@@ -139,23 +139,13 @@ extension LoginViewController {
                     
                 case .failure(let error):
                     print("API failure: \(error)")
-                    let alertController = UIAlertController(title: "Login error", message: "Wrong e-mail or password.", preferredStyle: .alert)
-                    let action2 = UIAlertAction(title: "Cancel", style: .cancel) { (action:UIAlertAction) in
-                        print("You've pressed cancel");
-                    }
-                    alertController.addAction(action2)
-                    self.present(alertController, animated: true)
-                    
-                    self.shakeTextField(self.passwordTextField)
-                    
+                    self.alert()
                 }
         }
         SVProgressHUD.dismiss()
     }
     
     func loginRememberedUser(){
-
-        
         if
             let email = UserDefaults.standard.string(forKey: "TVShows.email"),
             let password = UserDefaults.standard.string(forKey: "TVShows.password"){
@@ -163,7 +153,6 @@ extension LoginViewController {
                 "email": email,
                 "password": password
             ]
-            
             login(parameters: rememberedParameters)
         }
     }
@@ -176,6 +165,14 @@ extension LoginViewController {
         animation.fromValue = NSValue(cgPoint: CGPoint(x: textfield.center.x - 10, y: textfield.center.y))
         animation.toValue = NSValue(cgPoint: CGPoint(x: textfield.center.x + 10, y: textfield.center.y))
         textfield.layer.add(animation, forKey: "position")
+    }
+    
+    func alert() {
+        let alertController = UIAlertController(title: "Login error", message: "Wrong e-mail or password.", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Cancel", style: .cancel) { (action:UIAlertAction) in print("You've pressed cancel"); }
+        alertController.addAction(action)
+        self.present(alertController, animated: true)
+        self.shakeTextField(self.passwordTextField)
     }
 }
 

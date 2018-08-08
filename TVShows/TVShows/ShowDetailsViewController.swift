@@ -32,8 +32,6 @@ class ShowDetailsViewController: UIViewController {
     @IBOutlet weak var tvShowImageView: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        mockDetails()
         loadDetails()
         self.titleLabel.text = self.showDetails?.title
         self.descriptionLabel.text = self.showDetails?.description
@@ -110,8 +108,8 @@ private extension ShowDetailsViewController {
             .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { [weak self] (response: DataResponse<ShowDetails>) in
                 guard let `self` = self else { return }
                 switch response.result {
-                case .success(let parsedData):
                     
+                case .success(let parsedData):
                     self.showDetails = parsedData
                     self.titleLabel.text = self.showDetails?.title
                     self.titleLabel.text = self.showDetails?.description
@@ -124,12 +122,7 @@ private extension ShowDetailsViewController {
                     self.tvShowImageView.kf.setImage(with: url)
                     
                 case .failure:
-                    let alertController = UIAlertController(title: "Data reaching error", message: "Could not show data.", preferredStyle: .alert)
-                    let action1 = UIAlertAction(title: "Cancel", style: .cancel) { (action:UIAlertAction) in
-                        print("You've pressed cancel");
-                    }
-                    alertController.addAction(action1)
-                    self.present(alertController, animated: true)
+                    self.alert()
                 }
         }
     
@@ -155,16 +148,17 @@ private extension ShowDetailsViewController {
                     self.episodeNumber.text = String(self.episodes.count)
                     self.episodeTableView.reloadData()
                 case .failure:
-                    let alertController = UIAlertController(title: "Data reaching error", message: "Could not show data.", preferredStyle: .alert)
-                    let action1 = UIAlertAction(title: "Cancel", style: .cancel) { (action:UIAlertAction) in
-                        print("You've pressed cancel");
-                    }
-                    alertController.addAction(action1)
-                    self.present(alertController, animated: true)
+                    self.alert()
                 }
-                
                 SVProgressHUD.dismiss()
         }
+    }
+    
+    func alert(){
+        let alertController = UIAlertController(title: "Data reaching error", message: "Could not show data.", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Cancel", style: .cancel) { (action:UIAlertAction) in print("You've pressed cancel"); }
+        alertController.addAction(action)
+        self.present(alertController, animated: true)
     }
 }
 
