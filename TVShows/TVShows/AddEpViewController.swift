@@ -16,7 +16,6 @@ protocol AddEpViewControllerDelegate: class {
 
 class AddEpViewController: UIViewController {
     
-
     var showId: String = ""
     var token: String = ""
     weak var delegate: AddEpViewControllerDelegate?
@@ -28,18 +27,12 @@ class AddEpViewController: UIViewController {
     @IBOutlet weak var epNumberTextField: UITextField!
     @IBOutlet weak var epDescriptionTextField: UITextField!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-
-//        let navigationController = UINavigationController.init(rootViewController: AddEpViewController)
-//        present(navigationController, animated: true, completion: nil)
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(didSelectCancel))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(didSelectAddShow))
     }
-    
     
     @objc func didSelectCancel() {
         dismiss(animated: true)
@@ -48,9 +41,6 @@ class AddEpViewController: UIViewController {
     @objc func didSelectAddShow() {
         uploadImageOnAPI(token: token)
     }
-        
-        
-    
     
     @IBAction func uploadImageButtonTapped(_ sender: UIButton) {
         
@@ -60,10 +50,8 @@ class AddEpViewController: UIViewController {
         imagePicker.sourceType = .photoLibrary
         imagePicker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
         present(imagePicker, animated: true, completion: nil)
+        
     }
-    
-    // MARK:  - UIImagePickerControllerDelegate
-
 }
 
 //MARK: - API calls
@@ -92,10 +80,9 @@ extension AddEpViewController {
     }
     
     func processUploadRequest(_ uploadRequest: UploadRequest) {
-            uploadRequest
-                .responseDecodableObject(keyPath: "data") { [weak self](response:
-                    DataResponse<Media>) in
-                    guard let `self` = self else { return }
+            uploadRequest.responseDecodableObject(keyPath: "data") { [weak self] (response: DataResponse<Media>) in
+                    
+                guard let `self` = self else { return }
                     
                 switch response.result {
                 case .success(let media):

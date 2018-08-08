@@ -22,10 +22,8 @@ class CommentsViewController: UIViewController {
             commentsTableView.dataSource = self
             commentsTableView.delegate = self
             commentsTableView.estimatedRowHeight = 60
-//            commentsTableView.rowHeight = UITableViewAutomaticDimension
         }
     }
-    
     @IBOutlet weak var addCommentTextField: UITextField!
     
     
@@ -44,6 +42,7 @@ class CommentsViewController: UIViewController {
     @objc func keyboardWillShow(_ notification: NSNotification) {
         
         if let keyboardFrame: NSValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+            
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height
     
