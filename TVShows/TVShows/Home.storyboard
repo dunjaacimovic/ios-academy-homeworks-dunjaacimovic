@@ -423,6 +423,7 @@
                     <connections>
                         <outlet property="addCommentTextField" destination="ah2-rW-X3W" id="Ky9-yf-9s4"/>
                         <outlet property="commentsTableView" destination="yoZ-XV-PT1" id="CnC-kr-OQ9"/>
+                        <outlet property="stackViewBottomConstraint" destination="vdU-UV-fz8" id="bqW-dF-NRs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gvf-52-Nwt" userLabel="First Responder" sceneMemberID="firstResponder"/>

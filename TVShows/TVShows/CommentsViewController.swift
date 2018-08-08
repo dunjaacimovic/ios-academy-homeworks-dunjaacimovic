@@ -25,6 +25,7 @@ class CommentsViewController: UIViewController {
         }
     }
     @IBOutlet weak var addCommentTextField: UITextField!
+    @IBOutlet weak var stackViewBottomConstraint: NSLayoutConstraint!
     
     
     override func viewDidLoad() {
@@ -45,14 +46,12 @@ class CommentsViewController: UIViewController {
             
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height
-    
-            self.view.frame.origin.y = -(keyboardHeight)// Move view upward
-            }
-        
+            stackViewBottomConstraint.constant = 20 + keyboardHeight
+        }
     }
     
     @objc func keyboardWillHide(sender: NSNotification) {
-        self.view.frame.origin.y = 0 // Move view to original position
+        stackViewBottomConstraint.constant = 20
     }
 
     @IBAction func backButton(_ sender: UIButton) {
