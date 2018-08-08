@@ -25,20 +25,11 @@ class EpDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        epTitle.text = episodeTitle
-        epNumber.text = "S" + seasonNumber + " Ep" + episodeNumber
-        epDescription.text = episodeDescription
-        
-        guard let imageUrl = self.episodeImageUrl else {
-            return
-        }
-        let url = URL(string: "https://api.infinum.academy" + imageUrl)
-        epImage.kf.setImage(with: url)
+        setupUI()
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        viewWillAppear(animated)
+        super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
 
@@ -56,5 +47,18 @@ class EpDetailsViewController: UIViewController {
         let navigationController = UINavigationController(rootViewController: commentsViewController)
         
         present(navigationController, animated: true)
+    }
+}
+
+extension EpDetailsViewController{
+    
+    func setupUI(){
+        epTitle.text = episodeTitle
+        epNumber.text = "S" + seasonNumber + " Ep" + episodeNumber
+        epDescription.text = episodeDescription
+        
+        guard let imageUrl = self.episodeImageUrl else { return }
+        let url = URL(string: "https://api.infinum.academy" + imageUrl)
+        epImage.kf.setImage(with: url)
     }
 }
