@@ -38,6 +38,7 @@ class EpDetailsViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
 
